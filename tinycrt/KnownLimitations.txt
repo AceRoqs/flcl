@@ -1,0 +1,13 @@
+Windows only.
+Requires MSVC.
+TODO: Creation of property sheets might expose more limitations.
+
+No globals that require initialization.
+-Startup code does not call any global constructors.
+
+No exceptions.
+-TODO: Ths might require weird compiler imports.
+
+No linking to C code.
+-C++ constructs used in public headers, such as the using directive. This supports putting C library calls in the std namespace, without exporting to the global namespace.
+

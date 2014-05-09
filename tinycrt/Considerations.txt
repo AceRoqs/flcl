@@ -1,0 +1,7 @@
+Is a C runtime, not a C++ runtime.
+No global objects with constructors.
+No exceptions.
+
+Need property sheet
+-No default libs.
+-No /GX?

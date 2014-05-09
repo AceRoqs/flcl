@@ -1,0 +1,29 @@
+#ifndef __TINYCRT_CSTDIO
+#define __TINYCRT_CSTDIO
+
+namespace std
+{
+
+extern "C"
+{
+
+namespace __detail
+{
+
+struct std::FILE* _CDECL __file_handle(int _Index);
+
+}
+
+int _CDECL fprintf(_In_ struct std::FILE* _File, _In_z_ const char* _Format, ...);
+int _CDECL fwprintf(_In_ struct std::FILE* _File, _In_z_ const wchar_t* _Format, ...);
+int _CDECL printf(_In_z_ const char* _Format, ...);
+int _CDECL wprintf(_In_z_ const wchar_t* _Format, ...);
+}
+
+}
+
+#define stdout std::__detail::__file_handle(1)
+#define stderr std::__detail::__file_handle(2)
+
+#endif
+
