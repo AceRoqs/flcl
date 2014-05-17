@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "tinycrt.h"
+#include "cstdio"
 
 // TODO: 
 // minimize calls, heap/stack usage

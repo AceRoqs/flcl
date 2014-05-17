@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include <cstdio>
+#include "cstdio"   // TODO: can/should this use <> syntax?
 #include "tinycrt.h"
 
 // Definitions from Shlwapi.h.  Shlwapi.h cannot be included as it brings in MSVCRT definitions.
@@ -7,31 +7,23 @@
 LWSTDAPI_(int)      wvnsprintfA(_Out_writes_(cchDest) PSTR pszDest, _In_ int cchDest, _In_ _Printf_format_string_ PCSTR pszFmt, _In_ va_list arglist);
 LWSTDAPI_(int)      wvnsprintfW(_Out_writes_(cchDest) PWSTR pszDest, _In_ int cchDest, _In_ _Printf_format_string_ PCWSTR pszFmt, _In_ va_list arglist);
 
-namespace std
+extern "C" struct __detail::FILE* _CDECL __file_handle(int _Index)
 {
-
-namespace __detail
-{
-
-extern "C" struct FILE* _CDECL __file_handle(int _Index)
-{
-    struct FILE* file_handle = nullptr;
+    struct __detail::FILE* file_handle = nullptr;
 
     if(_Index == 1)
     {
-        file_handle = reinterpret_cast<FILE*>(GetStdHandle(STD_OUTPUT_HANDLE));
+        file_handle = reinterpret_cast<__detail::FILE*>(GetStdHandle(STD_OUTPUT_HANDLE));
     }
     else if(_Index == 2)
     {
-        file_handle = reinterpret_cast<FILE*>(GetStdHandle(STD_ERROR_HANDLE));
+        file_handle = reinterpret_cast<__detail::FILE*>(GetStdHandle(STD_ERROR_HANDLE));
     }
 
     return file_handle;
 }
 
-}
-
-int fprintf(_In_ struct std::FILE* _File, _In_z_ const char* _Format, ...)
+int fprintf(_In_ struct __detail::FILE* _File, _In_z_ const char* _Format, ...)
 {
     auto thread_locals = reinterpret_cast<_Thread_locals*>(TlsGetValue(_Get_thread_locals()));
 
@@ -54,7 +46,7 @@ int fprintf(_In_ struct std::FILE* _File, _In_z_ const char* _Format, ...)
     return 0;
 }
 
-int fwprintf(_In_ struct std::FILE* _File, _In_z_ const wchar_t* _Format, ...)
+int fwprintf(_In_ struct __detail::FILE* _File, _In_z_ const wchar_t* _Format, ...)
 {
     auto thread_locals = reinterpret_cast<_Thread_locals*>(TlsGetValue(_Get_thread_locals()));
 
@@ -109,7 +101,5 @@ int wprintf(_In_z_ const wchar_t* _Format, ...)
     va_end(args);
 
     return 0;
-}
-
 }
 

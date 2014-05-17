@@ -1,29 +1,27 @@
 #ifndef __TINYCRT_CSTDIO
 #define __TINYCRT_CSTDIO
 
-namespace std
-{
+// TODO: think if this header is necessary, or if it should be another header.
+#include "tinycrt.h"
 
 extern "C"
 {
 
+// TODO: std namespace?
+
 namespace __detail
 {
-
-struct std::FILE* _CDECL __file_handle(int _Index);
-
+    struct FILE* _CDECL __file_handle(int _Index);
 }
 
-int _CDECL fprintf(_In_ struct std::FILE* _File, _In_z_ const char* _Format, ...);
-int _CDECL fwprintf(_In_ struct std::FILE* _File, _In_z_ const wchar_t* _Format, ...);
+int _CDECL fprintf(_In_ struct __detail::FILE* _File, _In_z_ const char* _Format, ...);
+int _CDECL fwprintf(_In_ struct __detail::FILE* _File, _In_z_ const wchar_t* _Format, ...);
 int _CDECL printf(_In_z_ const char* _Format, ...);
 int _CDECL wprintf(_In_z_ const wchar_t* _Format, ...);
 }
 
-}
-
-#define stdout std::__detail::__file_handle(1)
-#define stderr std::__detail::__file_handle(2)
+#define stdout __detail::__file_handle(1)
+#define stderr __detail::__file_handle(2)
 
 #endif
 
