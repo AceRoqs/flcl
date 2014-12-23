@@ -1,0 +1,9 @@
+*.user
+/*.sdf
+/*.suo
+/*.opensdf
+/ARM.*
+/Win32.*
+/x64.*
+/ipch
+
