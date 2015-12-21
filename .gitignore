@@ -1,9 +1,15 @@
-*.user
-/*.sdf
-/*.suo
+# Solution file artifacts.
 /*.opensdf
-/ARM.*
-/Win32.*
-/x64.*
+/*.sdf
+.vs
+
+# Output folders.
+*Debug/*
+*Release/*
+*/Debug/*
+*/Release/*
+*/x64/*
+
+# Intellisense artifacts.
 /ipch
 

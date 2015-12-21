@@ -369,7 +369,7 @@ int _tmain(int argc, _In_count_(argc) PTSTR argv[])
                 {
                     folder.concat(_T('\\'));
 #ifdef _DEBUG
-                    _tprintf(_T("DEBUG: Current dir: %s\n"), folder);
+                    _tprintf(_T("DEBUG: Current dir: %s\n"), folder.c_str());
 #endif
 
                     File_traverse callback(verbose, process_hidden, delete_files);
